@@ -1,8 +1,6 @@
-
-const CACHE_NAME = 'radar-cache-v2';
+const CACHE_NAME = 'radar-cache-v3';
 
 self.addEventListener('install', e => {
-    // Force immediate activation
     self.skipWaiting();
 });
 
@@ -12,8 +10,6 @@ self.addEventListener('activate', e => {
 
 self.addEventListener('fetch', e => {
     e.respondWith(
-        fetch(e.request).catch(() => {
-            return caches.match(e.request);
-        })
+        fetch(e.request).catch(() => caches.match(e.request))
     );
 });
